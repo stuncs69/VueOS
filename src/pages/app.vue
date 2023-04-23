@@ -9,7 +9,6 @@
 </template>
 
 <style>
-
 .card {
     color: white;
     background-color: gray;
@@ -49,20 +48,38 @@
 }
 </style>
 
-<script>
+<script lang="ts">
 
 export default {
     data() {
         return {
+            debug: '',
             uptime: 0,
             wallpaper: "https://www.gannett-cdn.com/presto/2019/09/24/USAT/ca65ec63-180e-4edd-b92e-38cd0af795a9-catalina.jpg?crop=1279%2C720%2Cx0%2Cy278&width=1200"
         }
     },
-    mounted() {
+    async mounted() {
         setInterval(() => {
             this.uptime++;
+            //@ts-ignore
             this.$refs.time.innerHTML = new Date().toLocaleString();
         }, 1)
+
+        setInterval(async () => {
+            await $fetch("/api/validateToken", {
+                method: "POST",
+                body: JSON.stringify({
+                    token: "debug",
+                    id: 1
+                })
+            }).then(result => {
+                console.log(result)
+            })
+        }, 1000)
+
+
+
+
     }
 }
 
