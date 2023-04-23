@@ -72,8 +72,13 @@ export default {
                     token: "debug",
                     id: 1
                 })
-            }).then(result => {
-                console.log(result)
+            }).then((result: any) => {
+                if (JSON.parse(result).type == "GOOD_AUTH") {
+                    //ignore
+                } else {
+                    // refer to login screen for proper AUTH
+                    window.location.href = "/login"
+                }
             })
         }, 1000)
 

@@ -27,7 +27,7 @@ export default defineEventHandler(async (event) => {
 
     try {
         const rows = await query(body.token, body.id);
-        
+
         if (rows.length == 0) {
             return JSON.stringify({
                 type:"BAD_AUTH",
